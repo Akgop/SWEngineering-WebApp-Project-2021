@@ -6,10 +6,25 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "atob": "^2.1.2",
+    "axios": "^0.21.1",
+    "babylon": "^6.18.0",
+    "bootstrap": "^5.0.1",
+    "is-docker": "^2.2.1",
+    "mime": "^1.6.0",
     "react": "^17.0.2",
+    "react-app-polyfill": "^2.0.0",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "react-slick": "^0.28.1",
+    "regjsparser": "^0.6.9",
+    "rollup": "^2.45.2",
+    "rollup-plugin-buble": "^0.19.8",
+    "slick": "^1.12.2",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^6.5.7",
+    "web-vitals": "^1.0.1",
+    "which": "^2.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,6 +45,7 @@
       "not op_mini all"
     ],
     "development": [
+      "ie 11",
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
