@@ -1,17 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './Navbar/Navbar';
-import Product from './Sections/Product';
-import CollapseNav from './Navbar/CollapseNav';
-import Footer from './Footer/Footer';
+import Home from './Home/Home';
+import About from './Navbar/About';
+import MyPage from './MyPage/MyPage';
+import Landing from './Landing/Landing'
+import { Route } from 'react-router-dom';
 
 const App = () => {
     return (
         <div className="App">
-            <CollapseNav></CollapseNav>
-            <Navbar></Navbar>
-            <Product></Product>
-            <Footer></Footer>
+            <Route path="/" component={Landing} exact />
+            <Route path="/Home" component={Home} exact />
+            <Route path="/about" component={About} exact />
+            <Route path="/mypage" component={MyPage} exact />
         </div>
     );
 }
