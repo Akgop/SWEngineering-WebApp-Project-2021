@@ -1,4 +1,4 @@
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const CollapseNav = () => {
     return (
@@ -7,7 +7,7 @@ const CollapseNav = () => {
                 <div class="row align-items-start">
                     <div class="col-md-2">
                         <ul class="custom-menu">
-                            <li><Link to="/Home">Home</Link></li>
+                            <li><Link to="/home">Home</Link></li>
                         </ul>
                     </div>
                     <div class="col-md-2 float-right">
@@ -17,12 +17,12 @@ const CollapseNav = () => {
                     </div>
                     <div class="col-md-2">
                         <ul class="custom-menu">
-                            <li><Link to="/Home">Anything</Link></li>
+                            <li><Link to="/home">Anything</Link></li>
                         </ul>
                     </div>
                     <div class="col-md-2">
                         <ul class="custom-menu">
-                            <li><Link to='/Home'>Anything</Link></li>
+                            <li><Link to='/home'>Anything</Link></li>
                         </ul>
                     </div>
                     <div class="col-md-2 float-right">

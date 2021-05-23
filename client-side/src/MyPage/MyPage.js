@@ -1,6 +1,6 @@
-import Footer from "../Footer/Footer"
-import CollapseNav from "../Navbar/CollapseNav";
-import Navbar from "../Navbar/Navbar"
+import Footer from "../Components/Footer"
+import CollapseNav from "../Components/CollapseNav";
+import Navbar from "../Components/Navbar"
 
 const MyPage = () => {
     return (
