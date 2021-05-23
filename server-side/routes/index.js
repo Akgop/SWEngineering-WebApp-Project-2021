@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-var pool = mysql.createPool({
-  connectionLimit: 5,
+var connection = mysql.createConnection({
   user: 'developerTae',
   password: '1234',
   database: 'tutorial'
@@ -10,17 +9,15 @@ var pool = mysql.createPool({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  pool.getConnection(function(err, connection){
-    // Use the connection
-    connection.query('SELECT * FROM board', function(err, rows){
-      if(err) console.err("err : " + err);
-      console.log("rows : " + JSON.stringify(rows));
+  connection.connect();
 
-      res.render('index',  {title: 'test', rows: rows});
-      connection.release();
-
-    });
+  connection.query('SELECT * FROM board', function(err, results){
+    if (err) console.err('err : ' + err);
+    console.log(results);
+    return res.json(results)
   });
+
+  connection.end();
 });
 
 module.exports = router;
