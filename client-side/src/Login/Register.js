@@ -30,8 +30,9 @@ const Register = (props) => {
             return alert('비밀번호와 비밀번호 확인은 같아야 합니다.')
         }
 
-        console.log('Email', Email)
-        console.log('Password', Password)
+        console.log('Email', Email);
+        console.log('Password', Password);
+        console.log('Name', Name);
 
         let body = {
             email: Email,
@@ -60,7 +61,7 @@ const Register = (props) => {
                 <input type="email" value={Email} onChange={onEmailHandler} />
 
                 <label>Name</label>
-                <input type="email" value={Name} onChange={onNameHandler} />
+                <input type="text" value={Name} onChange={onNameHandler} />
 
                 <label>Password</label>
                 <input type="password" value={Password} onChange={onPasswordHandler} />

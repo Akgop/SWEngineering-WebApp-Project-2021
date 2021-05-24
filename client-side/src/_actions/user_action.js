@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { response } from '../../../server-side/app';
 import { LOGIN_USER, REGISTER_USER } from './types';
 
 export function loginUser(dataToSubmit){
