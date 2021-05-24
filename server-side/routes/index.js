@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
   connection.connect();
 
   connection.query('SELECT * FROM board', function(err, results){
-    if (err) console.err('err : ' + err);
+    if (err) console.error('err : ' + err);
     console.log(results);
     return res.json(results)
   });
