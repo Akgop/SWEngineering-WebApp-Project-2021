@@ -15,27 +15,25 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-/* POST login method. */
+/* POST register method. */
 router.post('/', function (req, res, next) {
-    var sql = "SELECT company_pwd FROM tbl_company WHERE company_email=?";
+    var sql = "INSERT INTO tbl_company(company_email, company_pwd, company_name, company_tel) VALUES (?, ?, ?, ?)";
     var email = req.body.email;
     var password = req.body.password;
-  
-    connection.query(sql, [email], function (err, results) {
-      if (err)
-        console.log(err);
-  
-      if (!results[0])
-        return res.json('please check your email.');
-  
-      console.log('사용자 입력: ', password);
-      console.log('db정보: ', results[0].company_pwd);
-      if (password == results[0].company_pwd)
-        return res.json({ loginSuccess: true });
-      else
-        return res.json({ loginSuccess: false });
-  
-    });
-  });
+    var name = req.body.name;
+    var tel = req.body.tel;
+    var datas = [email, password, name, tel];
+
+    connection.query(sql, datas, function (err, results) {
+        if (err) {
+            console.log("err : " + err);
+            return res.json({ success: false});
+        }
+        else {
+            console.log("results : " + JSON.stringify(results));
+            return res.json({ success: true});
+        }
+      });
+});
 
 module.exports = router;
