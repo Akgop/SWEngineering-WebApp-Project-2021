@@ -1,19 +1,39 @@
 var express = require('express');
 var router = express.Router();
+var mysql = require('mysql');
+var app = express();
+var dbConfig = require('./dbConfig');
+var dbOptions = {
+    user: dbConfig.user,
+    password: dbConfig.password,
+    database: dbConfig.database
+};
 
-/* GET */
-router.get('/', function(req, res, next) {
-    // GET METHOD는 요청할 일이 없을 테니 지워도 된다. 오로지 실험용
-    console.log("THIS IS GET");
-    res.send({get: "HIHI"});
+var connection = mysql.createConnection(dbOptions);
+
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+/* POST register method. */
+router.post('/', function (req, res, next) {
+    var sql = "INSERT INTO tbl_company(company_email, company_pwd, company_name, company_tel) VALUES (?, ?, ?, ?)";
+    var email = req.body.email;
+    var password = req.body.password;
+    var name = req.body.name;
+    var tel = req.body.tel;
+    var datas = [email, password, name, tel];
+
+    connection.query(sql, datas, function (err, results) {
+        if (err) {
+            console.log("err : " + err);
+            return res.json({ success: false});
+        }
+        else {
+            console.log("results : " + JSON.stringify(results));
+            return res.json({ success: true});
+        }
+      });
 });
-
-/* POST register Method */
-router.post('/', function(req, res, next) {
-    // 아래 코드 전부 지우고 {req.body} 에 들어있는 {email, name, password} 이용해서 코드 짜주세용
-    console.log("THIS IS POST");
-    console.log(req.body);
-    res.send({ success: true });
-})
 
 module.exports = router;

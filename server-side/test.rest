@@ -1,1 +1,31 @@
-GET http://127.0.0.1:3000 HTTP/1.1
+@endpoint = http://127.0.0.1:3030
+
+GET {{endpoint}} HTTP/1.1
+
+###
+
+GET {{endpoint}}/login HTTP/1.1
+
+
+###
+
+POST {{endpoint}}/login HTTP/1.1
+content-Type: application/json
+
+{
+    "email": "dw@dw.ac.kr",
+    "password": "dw1234"
+}
+
+
+###
+
+POST {{endpoint}}/register HTTP/1.1
+content-Type: application/json
+
+{
+    "email": "hj@hj.ac.kr",
+    "password": "hj123",
+    "name": "hj",
+    "tel": "010-1234-5678"
+}
