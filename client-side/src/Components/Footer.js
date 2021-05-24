@@ -9,12 +9,12 @@ const Footer = () => {
                             Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                         </div>
                     </div>
-                    <div class="col-sm-6 social text-md-end">
+                    {/* <div class="col-sm-6 social text-md-end">
                         <a href="#"><span class="bi bi-twitter"></span></a>
                         <a href="#"><span class="bi bi-facebook"></span></a>
                         <a href="#"><span class="bi bi-instagram"></span></a>
                         <a href="#"><span class="bi bi-linkedin"></span></a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </footer>

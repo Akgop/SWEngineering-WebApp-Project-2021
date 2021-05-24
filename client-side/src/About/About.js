@@ -1,6 +1,6 @@
-import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer/Footer';
-import CollapseNav from './CollapseNav';
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
+import CollapseNav from '../Components/CollapseNav';
 
 const About = () => {
     return (

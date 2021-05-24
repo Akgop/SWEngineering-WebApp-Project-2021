@@ -1,5 +1,5 @@
-import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer/Footer';
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
 
 const Landing = () => {
     return (

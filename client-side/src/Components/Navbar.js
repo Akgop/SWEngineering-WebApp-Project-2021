@@ -1,13 +1,13 @@
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
         <nav class="navbar navbar-light custom-navbar">
             <div class="container">
                 <Link to="/Home" class="navbar-brand">Recipes for Fun.</Link>
-                <a href="#" class="burger" data-bs-toggle="collapse" data-bs-target="#main-navbar">
+                {/* <a href="#" class="burger" data-bs-toggle="collapse" data-bs-target="#main-navbar">
                     <span></span>
-                </a>
+                </a> */}
             </div>
         </nav>
     )

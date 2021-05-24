@@ -1,7 +1,7 @@
-import Navbar from '../Navbar/Navbar';
+import Navbar from '../Components/Navbar';
 import Product from '../Sections/Product';
-import CollapseNav from '../Navbar/CollapseNav';
-import Footer from '../Footer/Footer';
+import CollapseNav from '../Components/CollapseNav';
+import Footer from '../Components/Footer';
 
 const Home = () => {
     return (
