@@ -9,15 +9,11 @@ var connection = mysql.createConnection({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  connection.connect();
-
   connection.query('SELECT * FROM company', function(err, results){
     if (err) console.error('err : ' + err);
     console.log(results);
     return res.json(results)
   });
-
-  connection.end();
 });
 
 module.exports = router;
