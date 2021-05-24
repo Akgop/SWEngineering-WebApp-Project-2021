@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  connection.query('SELECT * FROM company', function(err, results){
+  connection.query('SELECT * FROM tbl_company', function(err, results){
     if (err) console.error('err : ' + err);
     console.log(results);
     return res.json(results)
