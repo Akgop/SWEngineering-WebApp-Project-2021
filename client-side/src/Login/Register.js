@@ -43,7 +43,7 @@ const Register = (props) => {
         dispatch(registerUser(body))
             .then(response => {
                 if (response.payload.success) {
-                    props.history.push('/');
+                    props.history.push('/login');
                 }
                 else {
                     alert('Error');

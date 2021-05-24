@@ -14,7 +14,7 @@ router.post('/', function(req, res, next) {
     // 아래 코드 전부 지우고 {req.body} 에 들어있는 {email, password} 이용해서 코드 짜주세용
     console.log("THIS IS POST");
     console.log(req.body);
-    res.send({post: "HIHIHHI"});
+    res.send({ loginSuccess: true, user_id: req.body.email });
 })
 
 module.exports = router;
