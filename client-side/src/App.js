@@ -5,6 +5,7 @@ import About from './About/About';
 import MyPage from './MyPage/MyPage';
 import Landing from './Landing/Landing';
 import Login from './Login/Login';
+import Register from './Login/Register';
 import { Route } from 'react-router-dom';
 
 
@@ -16,6 +17,7 @@ const App = () => {
             <Route path="/about" component={About} exact />
             <Route path="/mypage" component={MyPage} exact />
             <Route path="/login" component={Login} exact />
+            <Route path="/register" component={Register} exact />
         </div>
     );
 }
