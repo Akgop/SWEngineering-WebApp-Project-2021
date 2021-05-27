@@ -1,9 +1,29 @@
-/*
-햄을 파는 모든 회사의 햄에 대한 정보
+var express = require('express');
+var router = express.Router();
+var mysql = require('mysql');
+var app = express();
+var dbConfig = require('./dbConfig');
+var dbOptions = {
+    user: dbConfig.user,
+    password: dbConfig.password,
+    database: dbConfig.database
+};
 
-front:
-product_name을 주세용
+var connection = mysql.createConnection(dbOptions);
 
-back:
-company_name
-*/
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+/* GET menu_id. */
+router.get('/', function (req, res, next) {
+  var sql_1 = "SELECT * FROM tbl_product WHERE category_name = ?";
+  var category_name = req.body.category_name;
+  var sql1s = mysql.format(sql_1, category_name); 
+  connection.query(sql1s, function (err, ingredient) {
+    return res.json(ingredient);
+  });
+});
+
+module.exports = router;
