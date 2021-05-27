@@ -23,29 +23,27 @@ router.get('/', function (req, res, next) {
 
 /* POST register method. */
 router.post('/', function (req, res, next) {
-    const sql = "INSERT INTO tbl_customer(customer_email, customer_pwd, customer_name, customer_phone, customer_destination) VALUES (?, ?, ?, ?, ?)";
-    let email = req.body.email;
-    let password = req.body.password;
-    let name = req.body.name;
-    let phone = req.body.phone;
-    let address = req.body.address;
-    let datas = [email, password, name, phone, address];
+    var sql = "INSERT INTO tbl_customer(customer_email, customer_pwd, customer_name, customer_phone, customer_destination) VALUES (?, ?, ?, ?, ?)";
+    var email = req.body.email;
+    var password = req.body.password;
+    var name = req.body.name;
+    var phone = req.body.phone;
+    var address = req.body.address;
+    var datas = [email, password, name, phone, address];
+
+    console.log(req.body);
 
     connection.query(sql, datas, function (err, results) {
-        if (err) {
-            console.log("err : " + err);
-            res.render(`<script> alert("회원가입 도중 오류가 발생했습니다") </script>`);
-        }
+        if (err) console.log(err);
+
         console.log("results : " + JSON.stringify(results));
-        // return res.json({ success: true });
+
         res.cookie("login", {
             authorized: true,
-            id: "custeomer_id",
+            id: results.insert_id,
         });
         res.redirect('/');
     });
-
-    console.log(req.body);
 });
 
 module.exports = router;

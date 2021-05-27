@@ -13,6 +13,7 @@ POST {{endpoint}}/login HTTP/1.1
 content-Type: application/json
 
 {
+    "usercode": "company",
     "email": "dw@dw.ac.kr",
     "password": "dw1234"
 }
@@ -20,6 +21,30 @@ content-Type: application/json
 
 ###
 
+POST {{endpoint}}/login HTTP/1.1
+content-Type: application/json
+
+{
+    "usercode": "customer",
+    "email": "dw@dw.ac.kr",
+    "password": "dw1234"
+}
+
+
+###
+
+
+POST {{endpoint}}/login HTTP/1.1
+content-Type: application/json
+
+{
+    "usercode": "admin",
+    "email": "dw@dw.ac.kr",
+    "password": "dw1234"
+}
+
+
+###
 POST {{endpoint}}/register HTTP/1.1
 content-Type: application/json
 
@@ -27,5 +52,6 @@ content-Type: application/json
     "email": "hj@hj.ac.kr",
     "password": "hj123",
     "name": "hj",
-    "tel": "010-1234-5678"
+    "phone": "010-1234-5678",
+    "address": "kwdorm"
 }
