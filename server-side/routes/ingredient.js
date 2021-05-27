@@ -16,14 +16,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-/* POST login method. */
+/* GET menu_id. */
 router.get('/', function (req, res, next) {
-  var sql = "SELECT * FROM tbl_menu ";
-  connection.query(sql, function (err, menu) {
-    console.log(menu);
-    return res.json(menu);
+  var sql_1 = "SELECT * FROM tbl_ingredient WHERE menu_id = ?";
+  var menu_id = req.body.menu_id;
+  var sql1s = mysql.format(sql_1, menu_id); 
+  connection.query(sql1s, function (err, ingredient) {
+    return res.json(ingredient);
   });
 });
-
 
 module.exports = router;
