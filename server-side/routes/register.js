@@ -15,25 +15,37 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+/* GET register method. */
+router.get('/', function (req, res, next) {
+    res.render('register', { title: "RECIPES" });
+})
+
+
 /* POST register method. */
 router.post('/', function (req, res, next) {
-    var sql = "INSERT INTO tbl_company(company_email, company_pwd, company_name, company_tel) VALUES (?, ?, ?, ?)";
-    var email = req.body.email;
-    var password = req.body.password;
-    var name = req.body.name;
-    var tel = req.body.tel;
-    var datas = [email, password, name, tel];
+    const sql = "INSERT INTO tbl_customer(customer_email, customer_pwd, customer_name, customer_phone, customer_destination) VALUES (?, ?, ?, ?, ?)";
+    let email = req.body.email;
+    let password = req.body.password;
+    let name = req.body.name;
+    let phone = req.body.phone;
+    let address = req.body.address;
+    let datas = [email, password, name, phone, address];
 
     connection.query(sql, datas, function (err, results) {
         if (err) {
             console.log("err : " + err);
-            return res.json({ success: false});
+            res.render(`<script> alert("회원가입 도중 오류가 발생했습니다") </script>`);
         }
-        else {
-            console.log("results : " + JSON.stringify(results));
-            return res.json({ success: true});
-        }
-      });
+        console.log("results : " + JSON.stringify(results));
+        // return res.json({ success: true });
+        res.cookie("login", {
+            authorized: true,
+            id: "custeomer_id",
+        });
+        res.redirect('/');
+    });
+
+    console.log(req.body);
 });
 
 module.exports = router;
