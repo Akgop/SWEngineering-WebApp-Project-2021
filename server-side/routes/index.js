@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
     var sql = "SELECT * FROM tbl_menu ";
     connection.query(sql, function (err, menu) {
       console.log(menu);
-      return res.json(menu);
+      res.render('index', {title: "RECIPES", menu: menu});
     });
   }
 });
