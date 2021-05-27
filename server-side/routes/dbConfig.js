@@ -1,7 +1,7 @@
 var dbConfig = {
-    user: 'root',
-    password: '1234',
-    database: 'recipe'
+    user: 'recipe_develop',
+    password: 'recipedev321',
+    database: 'recipedb'
   };
 
   module.exports = dbConfig;
