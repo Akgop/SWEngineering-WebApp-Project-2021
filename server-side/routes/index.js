@@ -15,13 +15,15 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-/* GET home page. */
+
+/* POST login method. */
 router.get('/', function (req, res, next) {
-  connection.query('SELECT * FROM tbl_company', function (err, results) {
-    if (err) console.error('err : ' + err);
-    console.log(results);
-    return res.json(results)
+  var sql = "SELECT * FROM tbl_menu ";
+  connection.query(sql, function (err, menu) {
+    console.log(menu);
+    return res.json(menu);
   });
 });
+
 
 module.exports = router;
