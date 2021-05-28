@@ -20,7 +20,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 router.get('/', function (req, res, next) {
   var sql_1 = "SELECT * FROM tbl_ingredient WHERE menu_id = ?";
   var menu_id = req.query.menu;
-  console.log(req.query);
   var sql1s = mysql.format(sql_1, menu_id); 
   connection.query(sql1s, function (err, ingredient) {
     res.render('ingredient', {title: "RECIPES", ingredient: ingredient})

@@ -178,5 +178,20 @@ values (2, "청양고추2.jpg", 1000, 0, 5, "동원청양고추", "청양고추"
 insert into tbl_product(company_id, product_image, product_price, product_flag, product_avg_score, product_item_name, category_name)
 values (3, "청양고추3.jpg", 1000, 0, 5, "광운청양고추", "청양고추");
 
+insert into tbl_product(company_id, product_image, product_price, product_flag, product_avg_score, product_item_name, category_name)
+values (5, "라면 사리2.jpg", 1000, 0, 5, "CJ라면사리", "라면사리");
 
+insert into tbl_product(company_id, product_image, product_price, product_flag, product_avg_score, product_item_name, category_name)
+values (9, "라면 사리3.jpg", 1000, 0, 5, "HJ라면사리", "라면사리");
 
+insert into tbl_product(company_id, product_image, product_price, product_flag, product_avg_score, product_item_name, category_name)
+values (5, "소세지2.jpg", 1000, 0, 5, "CJ소세지", "소세지");
+
+insert into tbl_product(company_id, product_image, product_price, product_flag, product_avg_score, product_item_name, category_name)
+values (9, "소세지3.jpg", 1000, 0, 5, "HJ소세지", "소세지");
+
+insert into tbl_product(company_id, product_image, product_price, product_flag, product_avg_score, product_item_name, category_name)
+values (5, "통조림 햄2.jpg", 1000, 0, 5, "CJ햄", "햄");
+
+insert into tbl_product(company_id, product_image, product_price, product_flag, product_avg_score, product_item_name, category_name)
+values (9, "통조림 햄3.jpg", 1000, 0, 5, "HJ햄", "햄");
