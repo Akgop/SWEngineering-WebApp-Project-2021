@@ -19,11 +19,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 /* GET menu_id. */
 router.get('/', function (req, res, next) {
   var sql_1 = "SELECT * FROM tbl_product INNER JOIN tbl_category ON tbl_product.category_name = tbl_category.category_name and tbl_category.category_id = ?";
-  console.log(req.query.ingredient);
   var category_name = req.query.ingredient;
   var sql1s = mysql.format(sql_1, category_name); 
   connection.query(sql1s, function (err, product) {
-    console.log(product);
     res.render('product', {title: "RECIPES", product: product})
   });
 });
