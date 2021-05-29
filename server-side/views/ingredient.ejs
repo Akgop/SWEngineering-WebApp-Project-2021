@@ -63,8 +63,8 @@
         <div class="container">
             <div class="row mb-5 align-items-center">
                 <div class="col-md-12 col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
-                    <h2>원하는 메뉴를 선택하세요</h2>
-                    <p class="mb-0">Choose the menu you want &amp; Kwangwoon Univ.</p>
+                    <h2>구매하고자 하는 재료를 선택하세요</h2>
+                    <p class="mb-0">Choose some stuffs you need &amp; Kwangwoon Univ.</p>
                 </div>
                 <div class="col-md-12 col-lg-6 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
                     <div id="filters" class="filters">
@@ -77,14 +77,14 @@
                 </div>
             </div>
             <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
-                <% for (let i = 0; i < menu.length; i++) { %>
+                <% for (let i = 0; i < ingredient.length; i++) { %>
                     <div class="item web col-sm-6 col-md-4 col-lg-4 mb-4">
-                        <a href="/ingredient?menu=<%= menu[i].menu_id %>" class="item-wrap fancybox">
+                        <a href="/product?ingredient=<%= ingredient[i].category_name %>" class="item-wrap fancybox">
                             <div class="work-info">
-                                <h3><%= menu[i].menu_name %></h3>
+                                <h3><%= ingredient[i].ingredient_content %></h3>
                                 <span>Web</span>
                             </div>
-                            <img class="img-fluid" src="assets/img/<%= menu[i].menu_image %>">
+                            <img class="img-fluid" src="assets/img/<%= ingredient[i].ingredient_image %>">
                         </a>
                     </div>
                 <% } %>

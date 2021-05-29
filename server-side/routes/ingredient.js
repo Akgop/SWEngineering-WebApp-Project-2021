@@ -19,10 +19,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 /* GET menu_id. */
 router.get('/', function (req, res, next) {
   var sql_1 = "SELECT * FROM tbl_ingredient WHERE menu_id = ?";
-  var menu_id = req.body.menu_id;
+  var menu_id = req.query.menu;
   var sql1s = mysql.format(sql_1, menu_id); 
   connection.query(sql1s, function (err, ingredient) {
-    return res.json(ingredient);
+    res.render('ingredient', {title: "RECIPES", ingredient: ingredient})
   });
 });
 
