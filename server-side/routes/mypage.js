@@ -27,35 +27,21 @@ router.post('/', function (req, res, next) {
     let usercode = req.cookies.login['usercode'];
 
 	if (usercode == "customer") {
-		let sql = "SELECT customer_id, customer_pwd FROM tbl_customer WHERE customer_email=?";
-
-
-		console.log(req.body);
-
-		connection.query(sql, [email], function (err, results) {
+		let sql = "SELECT customer_email, customer_name, customer_phone, customer_destination, customer_point FROM tbl_customer WHERE customer_id=?";
+		connection.query(sql, [id], function (err, customer_info) {
 			if (err) console.log(err);
-
-			if (!results[0]) return res.json('please check your email.');
-
-			console.log('사용자 입력: ', password);
-			console.log('db정보(비밀번호): ', results[0].customer_pwd);
-			console.log('db정보(id): ', results[0].customer_id);
-
-			if (password == results[0].customer_pwd){
-				res.cookie("login", {
-					authorized: true,
-					id: results[0].customer_id,
-					usercode: usercode
-				});
-			res.redirect('/');}
-			else
-			res.redirect('/login');
+            console.log(customer_info);
+            return res.json(customer_info);
 		});
 	}
-    
-
-
-    
+    else if (usercode == "company") {
+		let sql = "SELECT company_email, company_name, company_tel, company_income FROM tbl_company WHERE company_id=?";
+		connection.query(sql, [id], function (err, company_info) {
+			if (err) console.log(err);
+            console.log(company_info);
+            return res.json(company_info);
+		});
+	}
 });
 
 /* GET logout method. */
