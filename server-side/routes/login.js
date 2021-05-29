@@ -1,24 +1,24 @@
-var express = require('express');
-var router = express.Router();
-var mysql = require('mysql');
-var app = express();
-var dbConfig = require('./dbConfig');
-var dbOptions = {
+const express = require('express');
+const router = express.Router();
+const mysql = require('mysql');
+const app = express();
+const dbConfig = require('./dbConfig');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const dbOptions = {
 	user: dbConfig.user,
 	password: dbConfig.password,
 	database: dbConfig.database
 };
-
-var connection = mysql.createConnection(dbOptions);
-
-var bodyParser = require('body-parser')
+const connection = mysql.createConnection(dbOptions);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 /* GET login method. */
 router.get('/', function (req, res, next) {
 	res.render('login', { title: "RECIPES" });
-})
+});
 
 
 /* POST login method. */
@@ -45,6 +45,7 @@ router.post('/', function (req, res, next) {
 				res.cookie("login", {
 					authorized: true,
 					id: results[0].customer_id,
+					usercode: usercode
 				});
 			res.redirect('/');}
 			else
@@ -71,6 +72,7 @@ router.post('/', function (req, res, next) {
 				res.cookie("login", {
 					authorized: true,
 					id: results[0].company_id,
+					usercode: usercode
 				});
 			res.redirect('/');}
 			else
@@ -97,6 +99,7 @@ router.post('/', function (req, res, next) {
 				res.cookie("login", {
 					authorized: true,
 					id: results[0].admin_id,
+					usercode: usercode
 				});
 			res.redirect('/');
 		}

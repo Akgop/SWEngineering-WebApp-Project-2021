@@ -19,14 +19,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 /* Landing Page GET method. */
 router.get('/', function (req, res, next) {
   // 로그인 되지 않은 유저라면 자동으로 로그인 페이지로 넘김.
-  if (!req.cookies.login) {
+  if (req.cookies.login['authorized'] == false) {
     res.redirect('/login');
   }
   else {
     var sql = "SELECT * FROM tbl_menu ";
     connection.query(sql, function (err, menu) {
       console.log(menu);
-      res.render('index', {title: "RECIPES", menu: menu});
+      res.render('index', { title: "RECIPES", menu: menu });
     });
   }
 });
