@@ -55,3 +55,33 @@ content-Type: application/json
     "phone": "010-1234-5678",
     "address": "kwdorm"
 }
+###
+POST  {{endpoint}}/basket HTTP/1.1
+content-Type: application/json
+
+[
+  {
+    "customer_id": "1",
+    "product_id": "3",
+    "basket_quantity": "2",
+    "basket_price": "400"
+  },
+  {
+    "customer_id": "1",
+    "product_id": "2",
+    "basket_quantity": "4",
+    "basket_price": "500"
+  },
+  {
+    "customer_id": "1",
+    "product_id": "4",
+    "basket_quantity": "4",
+    "basket_price": "500"
+  },
+  {
+    "customer_id": "1",
+    "product_id": "5",
+    "basket_quantity": "5",
+    "basket_price": "500"
+  }
+]
