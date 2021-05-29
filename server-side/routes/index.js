@@ -31,5 +31,10 @@ router.get('/', function (req, res, next) {
   }
 });
 
+/* GET logout method. */
+router.get('/logout', function (req, res, next) {
+  res.clearCookie('login');
+  res.redirect('/login');
+});
 
 module.exports = router;

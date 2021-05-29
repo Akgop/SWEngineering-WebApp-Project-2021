@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 /* GET mypage method. */
 router.get('/', function (req, res, next) {
-    res.render('mypage', { title: "마이페이지", login: req.cookies.login });
+    res.render('mypage', { title: "My Page" });
 });
 
 /* POST mypage method. */
@@ -43,14 +43,5 @@ router.post('/', function (req, res, next) {
 		});
 	}
 });
-
-/* GET logout method. */
-router.get('/logout', function (req, res, next) {
-    res.clearCookie('login');
-    res.redirect('/login');
-});
-
-
-
 
 module.exports = router;
