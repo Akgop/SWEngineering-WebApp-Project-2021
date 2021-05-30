@@ -41,7 +41,11 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-2"></div>
                 <div class="col-md-2"></div>
-                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <ul class="custom-menu">
+                        <li><a href="/basket">Basket</a></li>
+                    </ul>
+                </div>
                 <div class="col-md-2">
                     <ul class="custom-menu">
                         <li><a href="/mypage">My Page</a></li>
@@ -79,7 +83,7 @@
             <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
                 <% for (let i = 0; i < product.length; i++) { %>
                     <div class="item web col-sm-6 col-md-4 col-lg-4 mb-4">
-                        <a href="#" class="item-wrap fancybox">
+                        <a href="/productDetail?id=<%= product[i].product_id %>" class="item-wrap fancybox">
                             <div class="work-info">
                                 <h3><%= product[i].product_item_name %></h3>
                                 <span>Web</span>
@@ -102,6 +106,7 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">

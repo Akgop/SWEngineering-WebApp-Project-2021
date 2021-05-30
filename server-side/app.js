@@ -35,7 +35,7 @@ app.use('/register', registerRouter);
 app.use('/ingredient', ingredientRouter);
 app.use('/product', productRouter);
 app.use('/basket', basketRouter);
-app.use('/product_detail', productdetailRouter);
+app.use('/productDetail', productdetailRouter);
 app.use('/mypage', mypageRouter);
 app.use('/management', managementRouter);
 // catch 404 and forward to error handler

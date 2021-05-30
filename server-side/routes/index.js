@@ -33,7 +33,6 @@ router.get('/', function (req, res, next) {
   else {
     var sql = "SELECT * FROM tbl_menu ";
     connection.query(sql, function (err, menu) {
-      console.log(menu);
       res.render('index', { title: "RECIPES", menu: menu });
     });
   }
