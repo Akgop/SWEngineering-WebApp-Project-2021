@@ -39,8 +39,18 @@ router.get('/', function (req, res, next) {
 
 /* POST mypage method -> 개인정보 수정 */
 router.post('/', function (req, res, next) {
-	console.log(req.body);
-	return res.json(req.body);
+	let id = req.cookies.login['id'];
+	let new_phone = req.body.new_phone;
+	let new_address = req.body.new_address;
+
+	let sql = "UPDATE tbl_customer SET customer_phone=?, customer_destination=? WHERE customer_id=?";
+	let datas = [new_phone, new_address, id];
+	connection.query(sql, datas, function (err, update_result) {
+		if (err)
+			res.send("<script>alert('이메일이 겹치거나, 잘못된 요청으로 인해 변경되지 않았습니다.');history.back();</script>");
+		else
+			res.json(update_result);
+	});
 })
 
 module.exports = router;
