@@ -18,18 +18,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 /* Landing Page GET method. */
 router.get('/', function (req, res, next) {
-  // 로그인 되지 않은 유저라면 자동으로 로그인 페이지로 넘김.
+  // 쿠키가 존재하지 않는 경우
   if (!req.cookies.login) {
+    res.redirect('/login');
+  }
+  // 로그인 되지 않은 유저라면 자동으로 로그인 페이지로 넘김.
+  if (req.cookies.login['authorized'] == false) {
     res.redirect('/login');
   }
   else {
     var sql = "SELECT * FROM tbl_menu ";
     connection.query(sql, function (err, menu) {
       console.log(menu);
-      res.render('index', {title: "RECIPES", menu: menu});
+      res.render('index', { title: "RECIPES", menu: menu });
     });
   }
 });
 
+/* GET logout method. */
+router.get('/logout', function (req, res, next) {
+  res.clearCookie('login');
+  res.redirect('/login');
+});
 
 module.exports = router;
