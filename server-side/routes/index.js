@@ -26,6 +26,7 @@ router.get('/', function (req, res, next) {
   if (req.cookies.login['authorized'] == false) {
     res.redirect('/login');
   }
+  // 관리자는 관리자 페이지로 이동시킴
   if (req.cookies.login['usercode'] === "admin") {
     res.render('admin_main', {title: "RECIPES"});
   }
