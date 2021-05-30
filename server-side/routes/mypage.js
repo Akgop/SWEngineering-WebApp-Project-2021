@@ -17,12 +17,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 /* GET mypage method. */
 router.get('/', function (req, res, next) {
-    res.render('mypage', { title: "My Page" });
-});
-
-/* POST mypage method. */
-router.post('/', function (req, res, next) {
-    let authorized = req.cookies.login['authorized'];
     let id = req.cookies.login['id'];
     let usercode = req.cookies.login['usercode'];
 
@@ -31,7 +25,7 @@ router.post('/', function (req, res, next) {
 		connection.query(sql, [id], function (err, customer_info) {
 			if (err) console.log(err);
             console.log(customer_info);
-            return res.json(customer_info);
+            res.render('mypage', { title: "My Page", mypage: customer_info });
 		});
 	}
     else if (usercode == "company") {
@@ -39,7 +33,15 @@ router.post('/', function (req, res, next) {
 		connection.query(sql, [id], function (err, company_info) {
 			if (err) console.log(err);
             console.log(company_info);
-            return res.json(company_info);
+            res.render('mypage', { title: "My Page", mypage: company_info });
+		});
+	}
+    else if (usercode == "admin") {
+		let sql = "SELECT admin_email, admin_name FROM tbl_admin WHERE admin_id=?";
+		connection.query(sql, [id], function (err, admin_info) {
+			if (err) console.log(err);
+            console.log(admin_info);
+            res.render('mypage', { title: "My Page", mypage: admin_info });
 		});
 	}
 });
