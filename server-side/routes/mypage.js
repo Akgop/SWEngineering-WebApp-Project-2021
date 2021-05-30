@@ -47,7 +47,7 @@ router.post('/', function (req, res, next) {
 	let datas = [new_phone, new_address, id];
 	connection.query(sql, datas, function (err, update_result) {
 		if (err)
-			res.send("<script>alert('이메일이 겹치거나, 잘못된 요청으로 인해 변경되지 않았습니다.');history.back();</script>");
+			res.send("<script>alert('잘못된 요청으로 인해 변경되지 않았습니다.');history.back();</script>");
 		else
 			res.json(update_result);
 	});
