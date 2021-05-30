@@ -69,7 +69,7 @@ router.post('/', function (req, res, next) {
 
 		connection.query(sql, [email], function (err, results) {
 			if (err) console.log(err);
-
+			
 			if (!results[0]) return res.json('please check your email.');
 
 			if (password == results[0].admin_pwd) {
