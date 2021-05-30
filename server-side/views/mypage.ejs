@@ -18,7 +18,7 @@
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+    
     <link href="assets/css/style.css" rel="stylesheet">
 
     <title>
@@ -41,7 +41,11 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-2"></div>
                 <div class="col-md-2"></div>
-                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <ul class="custom-menu">
+                        <li><a href="#">Order History</a></li>
+                    </ul>
+                </div>
                 <div class="col-md-2">
                     <ul class="custom-menu">
                         <li><a href="/basket">Basket</a></li>
@@ -88,19 +92,21 @@
                             <tr>
                                 <td>휴대전화</td>
                                 <td>
-                                    <input type="text" id="new_phone" name="new_phone" placeholder="010-xxxx-xxxx" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" value="<%= mypage[0].customer_phone %>" />
+                                    <input type="text" id="new_phone" name="new_phone" placeholder="010-xxxx-xxxx"
+                                        pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" value="<%= mypage[0].customer_phone %>" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>주소(배송지)</td>
                                 <td>
-                                    <input type="text" id="new_address" name="new_address" value="<%= mypage[0].customer_destination %>" />
+                                    <input type="text" id="new_address" name="new_address"
+                                        value="<%= mypage[0].customer_destination %>" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>잔여 포인트</td>
                                 <td>
-                                    <%= mypage[0].customer_point %>
+                                    <p id="current"><%= mypage[0].customer_point %></p>
                                 </td>
                             </tr>
                             <tr>
@@ -113,11 +119,35 @@
                     </table>
                 </form>
             </div>
-            <div class=" col-md-3">
+            <div class=" col-md-2">
+            </div>
+            <div class="col-md-3">
+                <h2>포인트 충전</h2>
+                <input type="number" id="point" name="point" />
+                <button class="btn btn-primary" type="submit" onclick="addPoint()">포인트 추가</button>
             </div>
         </div>
         <br><br><br>
     </div>
+
+    <script>
+        function addPoint() {
+            const amount = document.getElementById("point").value;
+            const current = document.getElementById("current").innerHTML;
+
+            let updatePoint = (amount) => {
+                axios.patch('http://localhost:3030/mypage/point', {
+                    amount: amount,
+                    current: current
+                })
+                    .then(response => {
+                        alert("포인트가 추가되었습니다.");
+                    })
+                    .catch(error => console.error(error));
+            };
+            updatePoint(amount);
+        }
+    </script>
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -127,6 +157,7 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">

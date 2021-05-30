@@ -49,7 +49,18 @@ router.post('/', function (req, res, next) {
 		if (err)
 			res.send("<script>alert('잘못된 요청으로 인해 변경되지 않았습니다.');history.back();</script>");
 		else
-			res.json(update_result);
+			res.redirect('/');
+	});
+})
+
+router.patch('/point', function(req, res, next) {
+	console.log(req.body, req.cookies.login);
+	let new_point = parseInt(req.body.current) + parseInt(req.body.amount);
+	let id = req.cookies.login['id'];
+	let datas = [new_point, id];
+	let sql = "UPDATE tbl_customer SET customer_point=? WHERE customer_id=?"
+	connection.query(sql, datas, function (err, points) {
+		return res.json(points);
 	});
 })
 
