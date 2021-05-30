@@ -26,6 +26,9 @@ router.get('/', function (req, res, next) {
   if (req.cookies.login['authorized'] == false) {
     res.redirect('/login');
   }
+  if (req.cookies.login['usercode'] === "admin") {
+    res.render('admin_main', {title: "RECIPES"});
+  }
   else {
     var sql = "SELECT * FROM tbl_menu ";
     connection.query(sql, function (err, menu) {
