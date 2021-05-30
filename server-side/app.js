@@ -13,7 +13,8 @@ var ingredientRouter = require('./routes/ingredient');
 var productRouter = require('./routes/product');
 var basketRouter = require('./routes/basket');
 var productdetailRouter = require('./routes/product_detail');
-
+var mypageRouter = require('./routes/mypage');
+var managementRouter = require('./routes/management');
 var app = express();
 
 // view engine setup
@@ -35,7 +36,8 @@ app.use('/ingredient', ingredientRouter);
 app.use('/product', productRouter);
 app.use('/basket', basketRouter);
 app.use('/product_detail', productdetailRouter);
-
+app.use('/mypage', mypageRouter);
+app.use('/management', managementRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

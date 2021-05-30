@@ -44,7 +44,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-2">
                     <ul class="custom-menu">
-                        <li><a href="/mypage">My Page</a></li>
+                        <li><a href="/basket">Basket</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
@@ -58,41 +58,66 @@
 </head>
 
 <body>
-    <!-- ======= Works Section ======= -->
-    <section class="section site-portfolio">
-        <div class="container">
-            <div class="row mb-5 align-items-center">
-                <div class="col-md-12 col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
-                    <h2>원하는 메뉴를 선택하세요</h2>
-                    <p class="mb-0">Choose the menu you want &amp; Kwangwoon Univ.</p>
-                </div>
-                <div class="col-md-12 col-lg-6 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
-                    <div id="filters" class="filters">
-                        <a href="#" data-filter="*" class="active">All</a>
-                        <a href="#" data-filter=".web">Web</a>
-                        <a href="#" data-filter=".design">Design</a>
-                        <a href="#" data-filter=".branding">Branding</a>
-                        <a href="#" data-filter=".photography">Photography</a>
-                    </div>
-                </div>
+    <div class="container">
+        <br><br><br>
+        <div class="row">
+            <!-- <div class="col-md-3"></div> -->
+            <div class="col-md-6">
+                <h2>개인정보 조회</h2>
+                <form action="/mypage" method="post">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>이름</td>
+                                <td>
+                                    <%= mypage[0].customer_name %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>이메일</td>
+                                <td>
+                                    <%= mypage[0].customer_email %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>휴대전화</td>
+                                <td>
+                                    <input type="text" id="new_phone" name="new_phone" placeholder="010-xxxx-xxxx" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" value="<%= mypage[0].customer_phone %>" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>주소(배송지)</td>
+                                <td>
+                                    <input type="text" id="new_address" name="new_address" value="<%= mypage[0].customer_destination %>" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>잔여 포인트</td>
+                                <td>
+                                    <%= mypage[0].customer_point %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <button class="btn btn-primary" type="submit" formmethod="POST"">개인정보 수정</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
             </div>
-            <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
-                <% for (let i = 0; i < menu.length; i++) { %>
-                    <div class="item web col-sm-6 col-md-4 col-lg-4 mb-4">
-                        <a href="/ingredient?menu=<%= menu[i].menu_id %>" class="item-wrap fancybox">
-                            <div class="work-info">
-                                <h3><%= menu[i].menu_name %></h3>
-                                <span>Web</span>
-                            </div>
-                            <img class="img-fluid" src="assets/img/<%= menu[i].menu_image %>">
-                        </a>
-                    </div>
-                <% } %>
+            <div class=" col-md-3">
             </div>
         </div>
-    </section><!-- End  Works Section -->
-
-
+        <br><br><br>
+    </div>
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
