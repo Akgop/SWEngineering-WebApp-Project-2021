@@ -34,7 +34,6 @@
             </a>
         </div>
     </nav>
-    <!-- ======= Collapse Nav ======= -->
     <div class="collapse navbar-collapse custom-navmenu" id="main-navbar">
         <div class="container py-2 py-md-5">
             <div class="row align-items-start">
@@ -44,12 +43,12 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-2">
                     <ul class="custom-menu">
-                        <li><a href="/basket">Basket</a></li>
+                        <li><a href="/login">Login</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
                     <ul class="custom-menu">
-                        <li><a href="/logout">Logout</a></li>
+                        <li><a href="/register">Sign Up</a></li>
                     </ul>
                 </div>
             </div>
@@ -58,66 +57,32 @@
 </head>
 
 <body>
-    <div class="container">
-        <br><br><br>
-        <div class="row">
-            <!-- <div class="col-md-3"></div> -->
-            <div class="col-md-6">
-                <h2>개인정보 조회</h2>
-                <form action="/mypage" method="POST">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>이름</td>
-                                <td>
-                                    <%= mypage[0].customer_name %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>이메일</td>
-                                <td>
-                                    <%= mypage[0].customer_email %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>휴대전화</td>
-                                <td>
-                                    <input type="text" id="new_phone" name="new_phone" placeholder="010-xxxx-xxxx" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" value="<%= mypage[0].customer_phone %>" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>주소(배송지)</td>
-                                <td>
-                                    <input type="text" id="new_address" name="new_address" value="<%= mypage[0].customer_destination %>" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>잔여 포인트</td>
-                                <td>
-                                    <%= mypage[0].customer_point %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <button class="btn btn-primary" type="submit" formmethod="POST"">개인정보 수정</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
-            </div>
-            <div class=" col-md-3">
-            </div>
+    <section class="section site-portfolio">
+        <div class="container">
+            <form action="/mypage/edit" method="post">
+                <div class="col-md-5 center-block">
+                    <label>Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required/>
+                    
+                    <label>Name</label>
+                    <input type="text" id="name" name="name" class="form-control" required/>
+
+                    <label>Phone</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="010-xxxx-xxxx" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required/>
+
+                    <label>Address</label>
+                    <input type="text" id="address" name="address" class="form-control" />
+
+                    <label>Password</label>
+                    <input type="password" id="password" name="password" class="form-control" />
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-primary" value="Sign Up"></button>
+                </div>
+            </form>
         </div>
-        <br><br><br>
-    </div>
+    </section>
+
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -46,4 +46,10 @@ router.get('/', function (req, res, next) {
 	}
 });
 
+/* POST mypage method -> 개인정보 수정 */
+router.post('/', function (req, res, next) {
+	console.log(req.body);
+	return res.json(req.body);
+})
+
 module.exports = router;
