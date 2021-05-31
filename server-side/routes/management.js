@@ -11,27 +11,50 @@ const connection = mysql.createConnection(dbOptions);
 
 /* GET 회원 조회 화면 */
 router.get('/', function (req, res, next) {
-    res.redirect('/management/list/1');
-});
+    let isAdmin = req.cookies.login.usercode;
+    let usercode = req.query.usercode;
 
-router.get('/list/:page', function (req, res, next) {
-    let usercode = req.body.usercode;
+    // 관리자가 아니라면 접근 불가능
+    if (isAdmin !== "admin") {
+        res.redirect("/");
+    }
 
-    if (usercode == "customer") {
+    if (usercode === "customer") {
         let sql = "SELECT * FROM tbl_customer";
         connection.query(sql, function (err, customer_info) {
             if (err) console.error(err);
-            res.json(customer_info);
+            console.log({title: "RECIPES", usercode: "customer" , info: customer_info});
+            res.render("management", {title: "RECIPES", usercode: "customer" , info: customer_info});
         });
     }
-    else if (usercode == "company") {
+    else if (usercode === "company") {
         let sql = "SELECT * FROM tbl_company";
         connection.query(sql, function (err, company_info) {
             if (err) console.error(err);
-            res.json(company_info);
+            console.log({title: "RECIPES", usercode: "company", info: company_info});
+            res.render("management", {title: "RECIPES", usercode: "company", info: company_info});
         });
     }
 });
+
+// router.get('/list/:page', function (req, res, next) {
+//     let usercode = req.body.usercode;
+
+//     if (usercode == "customer") {
+//         let sql = "SELECT * FROM tbl_customer";
+//         connection.query(sql, function (err, customer_info) {
+//             if (err) console.error(err);
+//             res.json(customer_info);
+//         });
+//     }
+//     else if (usercode == "company") {
+//         let sql = "SELECT * FROM tbl_company";
+//         connection.query(sql, function (err, company_info) {
+//             if (err) console.error(err);
+//             res.json(company_info);
+//         });
+//     }
+// });
 
 /* GET 회원 추가 화면 */
 router.get('/insert', function (req, res, next) {
