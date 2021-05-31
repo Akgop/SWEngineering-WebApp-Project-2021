@@ -64,6 +64,9 @@
                     <h2>장바구니</h2>
                     <p class="mb-0">Here are menu you selected &amp; Kwangwoon Univ.</p>
                 </div>
+                <div class="col-md-12 col-lg-6 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
+                    <button class="btn btn-primary" onclick="orderButton()">전체 주문</button>
+                </div>
             </div>
             <div id="portfolio-grid" class="no-gutter" data-aos="fade-up" data-aos-delay="200">
                 <% for (let i=0; i < basket.length; i++ ) { %>
@@ -75,6 +78,8 @@
                                 </h3>
                             </div>
                             <input type="hidden" id="product_id" name="product_id" value="<%= basket[i].product_id %>">
+                            <input type="hidden" id="price" name="price" value="<%= basket[i].basket_price %>">
+                            <input type="hidden" id="company_id" name="company_id" value="<%= basket[i].company_id %>">
                             <img class="img-fluid" src="assets/img/<%= basket[i].product_image %>">
                         </a>
                         <div class="card-body">
@@ -91,6 +96,31 @@
     </section>
 
     <script>
+        function orderButton() {
+            let products_id = document.querySelectorAll("#product_id");
+            let quantities = document.querySelectorAll("#quantity");
+            let price = document.querySelectorAll("#price");
+            let company_id = document.querySelectorAll("#company_id");
+            let data = [];
+            for (let i = 0; i < products_id.length; i++) {
+                let order_price = parseInt(quantities[i].value) * parseInt(price[i].value);
+                data.push({
+                    product_id: products_id[i].value,
+                    order_quantity: quantities[i].value,
+                    order_price: order_price,
+                    company_id: company_id[i].value
+                })
+            }
+            let orderFromBasket = () => {
+                axios.post("http://localhost:3030/order", data)
+                    .then(response => {
+                        console.log(response);
+                        alert("주문이 완료되었습니다.");
+                    })
+                    .catch(error => console.error(error));
+            }
+            orderFromBasket();
+        }
         // function deleteButton() {
         //     const product_id = document.querySelectorAll("#product_id");
         //     const idx = document.getElementById("")
