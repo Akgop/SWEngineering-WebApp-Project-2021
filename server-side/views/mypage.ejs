@@ -142,6 +142,7 @@
                 })
                     .then(response => {
                         alert("포인트가 추가되었습니다.");
+                        window.location.reload();
                     })
                     .catch(error => console.error(error));
             };

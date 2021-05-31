@@ -1,6 +1,6 @@
 var dbConfig = {
-    user: 'root',
-    password: '1234',
+    user: 'recipe_develop',
+    password: 'recipedev321',
     database: 'recipedb'
   };
 
