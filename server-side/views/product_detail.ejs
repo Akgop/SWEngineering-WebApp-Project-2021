@@ -62,40 +62,81 @@
 </head>
 
 <body>
-    <!-- ======= Works Section ======= -->
-    <section class="section site-portfolio">
-        <div class="container">
-            <div class="row mb-5 align-items-center">
-                <div class="col-md-12 col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
-                    <h2>원하는 메뉴를 선택하세요</h2>
-                    <p class="mb-0">Choose the menu you want &amp; Kwangwoon Univ.</p>
-                </div>
-                <div class="col-md-12 col-lg-6 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
-                    <div id="filters" class="filters">
-                        <a href="#" data-filter="*" class="active">All</a>
-                        <a href="#" data-filter=".web">Web</a>
-                        <a href="#" data-filter=".design">Design</a>
-                        <a href="#" data-filter=".branding">Branding</a>
-                        <a href="#" data-filter=".photography">Photography</a>
-                    </div>
+    <div class="container">
+        <br><br><br>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <div class="item web col-sm-12">
+                    <a class="item-wrap fancybox">
+                        <div class="work-info">
+                            <h3><%= product_detail[0].product_item_name %></h3>
+                        </div>
+                        <img class="img-fluid" src="assets/img/<%= product_detail[0].product_image %>">
+                    </a>
                 </div>
             </div>
-            <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
-                <% for (let i = 0; i < menu.length; i++) { %>
-                    <div class="item web col-sm-6 col-md-4 col-lg-4 mb-4">
-                        <a href="/ingredient?menu=<%= menu[i].menu_id %>" class="item-wrap fancybox">
-                            <div class="work-info">
-                                <h3><%= menu[i].menu_name %></h3>
-                                <span>Web</span>
-                            </div>
-                            <img class="img-fluid" src="assets/img/<%= menu[i].menu_image %>">
-                        </a>
-                    </div>
-                <% } %>
+            <div class="col-md-4">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <input type="hidden" id="id" name="id" value="<%= product_detail[0].product_id %>">
+                        <tr>
+                            <td>품목</td>
+                            <td><%= product_detail[0].category_name %></td>
+                        </tr>
+                        <tr>
+                            <td>제품명</td>
+                            <td><%= product_detail[0].product_item_name %></td>
+                        </tr>
+                        <tr>
+                            <td>가격</td>
+                            <td><p id="price"><%= product_detail[0].product_price %></p></td>
+                        </tr>
+                        <tr>
+                            <td>평점</td>
+                            <td><%= product_detail[0].product_avg_score %></td>
+                        </tr>
+                        <tr>
+                            <td>수량</td>
+                            <td><input type="number" id="quantity" name="quantity" /></td>
+                        </tr>
+                        <tr>
+                            <td><button class="btn btn-primary" onclick="basketButton()">장바구니 담기</button></td>
+                            <td><button class="btn btn-primary" onclick="order()">즉시 구매</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section><!-- End  Works Section -->
+    </div>
 
+    <script>
+        function basketButton() {
+            const quantity = document.getElementById("quantity").value;
+            const product_id = document.getElementById("id").value;
+            let price = document.getElementById("price").innerHTML;
+            price = parseInt(price) * parseInt(quantity);
+            console.log(quantity, product_id, price);
+            let addToBasket = () => {
+                axios.post('http://localhost:3030/basket', {
+                    product_id: product_id,
+                    quantity: quantity,
+                    price: price
+                })
+                    .then(response => {
+                        alert("장바구니에 추가되었습니다.");
+                    })
+                    .catch(error => console.error(error));
+            }
+            addToBasket();
+        }
+    </script>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
@@ -106,6 +147,7 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
