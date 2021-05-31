@@ -1,4 +1,18 @@
-/* 
-주문 내역.
-주문 프로세스
-결제 완료 -> 구매자 포인트 업데이트 -> 판매자 수입 업데이트 -> */
+const express = require('express');
+const router = express.Router();
+const mysql = require('mysql');
+const dbConfig = require('./dbConfig');
+const dbOptions = {
+	user: dbConfig.user,
+	password: dbConfig.password,
+	database: dbConfig.database
+};
+const connection = mysql.createConnection(dbOptions);
+
+/* GET login method. */
+router.post('/', function (req, res, next) {
+	console.log(req.body);
+    return res.json(req.body);
+});
+
+module.exports = router;
