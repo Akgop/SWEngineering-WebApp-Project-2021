@@ -1,110 +1,65 @@
-var express = require('express');
-var router = express.Router();
-var mysql = require('mysql');
-var app = express();
-var dbConfig = require('./dbConfig');
-var dbOptions = {
+const express = require('express');
+const router = express.Router();
+const mysql = require('mysql');
+const app = express();
+const dbConfig = require('./dbConfig');
+const dbOptions = {
     user: dbConfig.user,
     password: dbConfig.password,
     database: dbConfig.database
 };
 
-var connection = mysql.createConnection(dbOptions);
+const connection = mysql.createConnection(dbOptions);
 
-var bodyParser = require('body-parser');
-const { database } = require('./dbConfig');
-const { query } = require('express');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-
-
-/* GET menu_id. */
-router.post('/', function (req, res, next) {
-  var pay__sql = "update tbl_customer set  customer_point = ? WHERE customer_id = ?";
-
-  var pay_flag = true
-  var total_price = 0;
-  var company_array = [];
-  var price_array = [];
-  var p_id_array = [];
-  var quantity_array = [];
-  var customer_id = req.cookies.login['id'];
-  
-  var len = Object.keys(req.body).length
-  var req_data = req.body;
-
-  
-
-  
-
-  req.body.forEach(element => {
-    var procudt_id = element.product_id
-    var order_quantity = element.order_quantity
-    var order_price = element.order_price
-    var company_id = element.company_id
-    total_price = total_price + order_price
-  
-    company_array.push(company_id);
-    console.log(order_price)
-    price_array.push(parseInt(order_price));
-    p_id_array.push(procudt_id)
-    quantity_array.push(order_quantity)
-
-    
-  });
-
-  console.log(company_array,price_array,p_id_array,quantity_array);
-
-
-  var customer_select = "SELECT customer_point FROM tbl_customer WHERE customer_id = ?"
-  
-  
-  
-
-  connection.query(customer_select, customer_id, function (err, response) {
-      console.log(response[0].customer_point);
-      console.log(total_price);
-      if (total_price <= response[0].customer_point){
-        var pay = response[0].customer_point - total_price
-        var pay_data = [pay,customer_id]
-        connection.query(pay__sql, pay_data, function (err, payment) {
-          var company_select = "SELECT company_income  FROM tbl_company WHERE company_id = ?";
-    for(var index =0; index < company_array.length; index ++){
-      
-      connection.query(company_select, company_array[index], function (err, response) {
-          var c_income = parseInt(response[0].company_income) + parseInt(price_array[index])
-          var company__sql = 'UPDATE tbl_company SET company_income = ? WHERE company_id = ?';
-          var insert_order = 'insert into tbl_order values (?,?,?,?,?,NOW())';
-          console.log(index)
-          console.log("수입" ,parseInt(price_array[0]))
-          var update_data = [c_income ,company_array[index]]
-          var inser_data = [customer_id ,p_id_array[index],quantity_array[index] , price_array[index]]
-          var id =company_array[index]
-          connection.query(company__sql, [c_income ,id], function (err, response) {
-            console.log(response)
-          });
-          connection.query(insert_order,[customer_id ,p_id_array[index],quantity_array[index] , price_array[index]], function (err, response) {
-            console.log(response)
-        });
+router.post('/', function(req, res, next) {
+  // SQL 실제 실행부. Promise로 비동기->동기 처리.
+  function SQLExecute(i, sql, data) {
+    return new Promise(resolve => {
+      connection.query(sql, data, function(err, result) {
+        resolve(result);
       });
-      
+    })
+  }
+
+  // 들어온 개수만큼 반복문을 돌린다.
+  async function SQLLoop () {
+    const customerId = req.cookies.login.id;
+    // 주문정보를 insert 한다, 장바구니에서 삭제한다, 판매자 income을 증가시킨다, 구매자 포인트를 차감시킨다.
+    const sql_insert_order = 'INSERT INTO tbl_order(customer_id, product_id, order_quantity, order_price, order_time) VALUES (?,?,?,?,NOW())';
+    const sql_delete_from_basket = "DELETE FROM tbl_basket WHERE customer_id=? and product_id=?";
+    const sql_get_prev_income = "SELECT company_income FROM tbl_company WHERE company_id=?";
+    const sql_update_new_income = "UPDATE tbl_company SET company_income=? WHERE company_id=?";
+    const sql_get_point = "SELECT customer_point FROM tbl_customer WHERE customer_id=?";
+    const sql_subtract_point = "UPDATE tbl_customer SET customer_point=? WHERE customer_id=?";
+    for (let i=0; i<req.body.length; i++) {
+      let e = req.body[i];
+      // 주문 정보 insert
+      let data_insert_order = [customerId, e.product_id, e.order_quantity, e.order_price];
+      await SQLExecute(i, sql_insert_order, data_insert_order);
+
+      // 장바구니 내역 삭제
+      let data_delete_from_basket = [customerId, e.product_id];
+      await SQLExecute(i, sql_delete_from_basket, data_delete_from_basket);
+
+      // 회사 income 업데이트
+      let data_get_prev_income = [e.company_id];
+      let companyIncome = await SQLExecute(i, sql_get_prev_income, data_get_prev_income);
+      let newIncome = parseInt(e.order_price) + parseInt(companyIncome[0].company_income);
+      let data_update_income = [newIncome, e.company_id];
+      await SQLExecute(i, sql_update_new_income, data_update_income);
+
+      // 구매자 포인트를 차감시킨다.
+      let data_get_point = [customerId];
+      let customerPoint = await SQLExecute(i, sql_get_point, data_get_point);
+      let newPoint = parseInt(customerPoint[0].customer_point) - parseInt(e.order_price);
+      let data_subtract_point = [newPoint, customerId];
+      await SQLExecute(i, sql_subtract_point, data_subtract_point);
     }
-
-          console.log("결제 완료");
-          connection.end();
-      });
-      }
-      else{
-        pay_flag = false;
-        return res.send(444);
-      }
-    });
-  console.log(company_array.length)
-
-  
-
-});
+  }
+  // 위 동기 함수 실행.
+  SQLLoop();
+  return res.json();
+})
 
 
 module.exports = router;
