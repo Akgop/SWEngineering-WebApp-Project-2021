@@ -59,4 +59,18 @@ router.post('/', function (req, res, next) {
     })
 })
 
+/* DELETE method */
+router.get('/delete', function(req, res, next) {
+    const productId = req.query.id;
+    const customerId = req.cookies.login.id;
+
+    const sql = "DELETE FROM tbl_basket WHERE customer_id=? and product_id=?"
+    let data = [customerId, productId];
+
+    connection.query(sql, data, function (err, response) {
+        console.log(response);
+        return res.redirect("/basket");
+    });
+})
+
 module.exports = router;
