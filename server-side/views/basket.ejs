@@ -114,8 +114,8 @@
             let orderFromBasket = () => {
                 axios.post("http://localhost:3030/order", data)
                     .then(response => {
-                        console.log(response);
                         alert("주문이 완료되었습니다.");
+                        window.location = "/"
                     })
                     .catch(error => console.error(error));
             }
