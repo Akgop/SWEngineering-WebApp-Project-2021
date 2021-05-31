@@ -120,8 +120,8 @@
         function basketButton() {
             const quantity = document.getElementById("quantity").value;
             const product_id = document.getElementById("id").value;
-            const price = document.getElementById("price").innerHTML;
-
+            let price = document.getElementById("price").innerHTML;
+            price = parseInt(price) * parseInt(quantity);
             console.log(quantity, product_id, price);
             let addToBasket = () => {
                 axios.post('http://localhost:3030/basket', {

@@ -20,16 +20,16 @@ router.post('/', function (req, res, next) {
     console.log(req.body);
     const customerId = req.cookies.login['id'];
     const productId = req.body.product_id;
-    const price = req.body.price;
+    let price = req.body.price;
     const quantity = req.body.quantity;
 
     // 이미 있는지 판별 -> 없으면 insert, 있으면 update
     let sql_lookup = "SELECT * FROM tbl_basket WHERE customer_id=? and product_id=?";
     let sql_insert = "INSERT INTO tbl_basket(customer_id, product_id, basket_quantity, basket_price) VALUES (?, ?, ?, ?)";
-    let sql_update = "UPDATE tbl_basket SET basket_quantity=? WHERE customer_id=? and product_id=?";
+    let sql_update = "UPDATE tbl_basket SET basket_quantity=?, basket_price=? WHERE customer_id=? and product_id=?";
     let data_lookup = [customerId, productId];
     let data_insert = [customerId, productId, quantity, price];
-    let data_update = [quantity, customerId, productId];
+    let data_update = [quantity, price, customerId, productId];
     connection.query(sql_lookup, data_lookup, function (err_lookup, lookup) {
         // 장바구니에 데이터가 없다면
         if (lookup.length === 0) {
