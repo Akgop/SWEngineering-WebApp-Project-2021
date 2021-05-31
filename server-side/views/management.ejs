@@ -43,7 +43,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-2">
                     <ul class="custom-menu">
-                        <li><a href="/management">회원 관리</a></li>
+                        <li><a href="#">My Page</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
@@ -60,34 +60,69 @@
     <section class="section site-portfolio">
         <div class="container">
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-6">
-                    <h2>관리자 페이지</h2>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <td>목록</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="/management?usercode=customer">회원 관리</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="/management?usercode=company">판매자 관리</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">판매 물품 관리</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Q&A 및 공지사항</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="col-12">
+                    <% if (usercode === "customer") { %>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>이름</td>
+                                    <td>이메일</td>
+                                    <td>전화번호</td>
+                                    <td>배송지</td>
+                                    <td>잔여 포인트</td>
+                                    <td>비고</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (let i=0; i<info.length; i++) { %>
+                                    <tr>
+                                        <td><%= info[i].customer_name %></td>
+                                        <td><%= info[i].customer_email %></td>
+                                        <td><%= info[i].customer_phone %></td>
+                                        <td><%= info[i].customer_destination %></td>
+                                        <td><%= info[i].customer_point %></td>
+                                        <td><button class="btn btn-primary" onclick="deleteUserButton()">회원 삭제</button></td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    <% } else { %>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>회사 이름</td>
+                                    <td>이메일</td>
+                                    <td>전화번호</td>
+                                    <td>총 판매액</td>
+                                    <td>비고</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (let i=0; i<info.length; i++) { %>
+                                    <tr>
+                                        <td><%= info[i].company_name %></td>
+                                        <td><%= info[i].company_email %></td>
+                                        <td><%= info[i].company_tel %></td>
+                                        <td><%= info[i].company_income %></td>
+                                        <td><button class="btn btn-primary" onclick="deleteCompanyButton()">판매자 삭제</button></td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    <% } %>
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        function deleteUserButton() {
+            
+        }
+        function deleteCompanyButton () {
+
+        }
+    </script>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
