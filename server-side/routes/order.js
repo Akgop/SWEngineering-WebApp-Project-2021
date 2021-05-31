@@ -12,12 +12,36 @@ const dbOptions = {
 const connection = mysql.createConnection(dbOptions);
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
+  const customerId = req.cookies.login.id;
+  // 주문을 넣는다.
+  function insertOrder(i, sql, data) {
+    console.log(i);
+    // connection.query(sql, data, function(err, result) {
+    //   console.log(i, insert_order);
+    // });
+  }
+
+  // 들어온 개수만큼 반복문을 돌린다.
+  async function insertLoop () {
+    let sql_insert_order = 'insert into tbl_order(customer_id, product_id, order_quantity, ) values (?,?,?,?,?,NOW())'
+    for (let i=0; i<req.body.length; i++) {
+      let e = req.body[i];
+      let data_insert_order = [customerId, e.product_id, e.ordier_quantity, e.order_price];
+      await insertOrder(i, sql_insert_order, data_insert_order);
+    }
+  }
+  insertLoop();
+
+  // 장바구니에서 삭제한다.
+
+  // 판매자 income을 증가시킨다.
+
+  // 구매자 포인트를 차감시킨다.
+
   return res.json(req.body);
 })
 
 
-// /* GET menu_id. */
 // router.post('/', function (req, res, next) {
 //   var pay__sql = "update tbl_customer set  customer_point = ? WHERE customer_id = ?";
 
