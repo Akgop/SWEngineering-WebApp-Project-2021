@@ -32,7 +32,6 @@ router.post('/', function (req, res, next) {
   var sql_2 = "UPDATE tbl_product SET product_avg_score = (SELECT AVG(product_score) FROM tbl_review  WHERE product_id = ?)";
   var update_data = [product_score]
   connection.query(sql_2, update_data, function (err, score) {
-    
     res.render('score', {title: "RECIPES", score: score})
   });
 
