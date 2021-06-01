@@ -16,8 +16,8 @@ var productdetailRouter = require('./routes/product_detail');
 var mypageRouter = require('./routes/mypage');
 var managementRouter = require('./routes/management');
 var orderRouter = require('./routes/order');
-var proregisterRouter = require('./routes/product_regiseter');
-var orderListRouter = require('./routes/customer_orderlist');
+var proregisterRouter = require('./routes/product_register');
+
 var app = express();
 
 // view engine setup
@@ -42,8 +42,8 @@ app.use('/productDetail', productdetailRouter);
 app.use('/mypage', mypageRouter);
 app.use('/management', managementRouter);
 app.use('/order', orderRouter);
-app.use('/product_regiseter', proregisterRouter);
-app.use('/customer_orderlist', orderListRouter);
+app.use('/productRegiseter', proregisterRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -61,6 +61,11 @@
         <div class="container">
             <form action="/register" method="post">
                 <div class="col-md-5 center-block">
+                    <select name="usercode" class="form-control">
+                        <option value="customer">구매자</option>
+                        <option value="company">판매자</option>
+                        <option value="admin">관리자</option>
+                    </select>
                     <label>Email</label>
                     <input type="email" id="email" name="email" class="form-control" required/>
                     
