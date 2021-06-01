@@ -5,8 +5,8 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -14,12 +14,12 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 
     <title>
         <%= title %>
@@ -69,47 +69,52 @@
     <!-- ======= Works Section ======= -->
     <section class="section site-portfolio">
         <div class="container">
-            <div class="row mb-5 align-items-center">
-                <div class="col-md-12 col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
-                    <h2>원하는 메뉴를 선택하세요</h2>
-                    <p class="mb-0">Choose the menu you want &amp; Kwangwoon Univ.</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <form action="/review" method="post" enctype="multipart/form-data">
+                            <thead>
+                                <tr>
+                                    <td>상품번호</td>
+                                    <td><input type="number" id="product_id" name="product_id" required/></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>사진 업로드</td>
+                                    <td><input type="file" id="review_image" name="review_image"></td>
+                                </tr>
+                                <tr>
+                                    <td>내용</td>
+                                    <td><textarea id="content" name="content"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>평점</td>
+                                    <td><input type="number" min="1" max="5" id="rating" name="rating" value="1"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><input type="submit" class="btn btn-primary" value="리뷰 작성"></td>
+                                </tr>
+                            </tbody>
+                        </form>
+                    </table>
                 </div>
-                <div class="col-md-12 col-lg-6 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
-                    <div id="filters" class="filters">
-                        <a href="#" data-filter="*" class="active">All</a>
-                        <a href="#" data-filter=".web">Web</a>
-                        <a href="#" data-filter=".design">Design</a>
-                        <a href="#" data-filter=".branding">Branding</a>
-                        <a href="#" data-filter=".photography">Photography</a>
-                    </div>
-                </div>
-            </div>
-            <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
-                <% for (let i = 0; i < menu.length; i++) { %>
-                    <div class="item web col-sm-6 col-md-4 col-lg-4 mb-4">
-                        <a href="/ingredient?menu=<%= menu[i].menu_id %>" class="item-wrap fancybox">
-                            <div class="work-info">
-                                <h3><%= menu[i].menu_name %></h3>
-                                <span>Web</span>
-                            </div>
-                            <img class="img-fluid" src="assets/img/<%= menu[i].menu_image %>">
-                        </a>
-                    </div>
-                <% } %>
             </div>
         </div>
     </section><!-- End  Works Section -->
 
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets/vendor/aos/aos.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
