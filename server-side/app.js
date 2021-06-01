@@ -16,6 +16,7 @@ var productdetailRouter = require('./routes/product_detail');
 var mypageRouter = require('./routes/mypage');
 var managementRouter = require('./routes/management');
 var orderRouter = require('./routes/order');
+
 var app = express();
 
 // view engine setup
