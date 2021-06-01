@@ -40,14 +40,14 @@ router.post('/', function (req, res, next) {
 				res.redirect('/login');
 		});
 	}
-	else if (usercode == "company") {
+	else if (usercode === "company") {
 		let sql = "SELECT company_id, company_pwd FROM tbl_company WHERE company_email=?";
 		let email = req.body.email;
 		let password = req.body.password;
 
 		connection.query(sql, [email], function (err, results) {
 			if (err) console.log(err);
-
+			
 			if (!results[0]) return res.json('please check your email.');
 
 			if (password == results[0].company_pwd) {
@@ -62,7 +62,7 @@ router.post('/', function (req, res, next) {
 				res.redirect('/login');
 		});
 	}
-	else if (usercode == "admin") {
+	else if (usercode === "admin") {
 		let sql = "SELECT admin_id, admin_pwd FROM tbl_admin WHERE admin_email=?";
 		let email = req.body.email;
 		let password = req.body.password;
