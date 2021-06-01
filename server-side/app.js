@@ -19,6 +19,7 @@ var orderRouter = require('./routes/order');
 var proregisterRouter = require('./routes/product_regiseter');
 var orderListRouter = require('./routes/customer_orderlist');
 var statictRouter = require('./routes/order_static');
+var deleteRouter = require('./routes/product_delete');
 var app = express();
 
 // view engine setup
@@ -46,6 +47,7 @@ app.use('/order', orderRouter);
 app.use('/product_regiseter', proregisterRouter);
 app.use('/customer_orderlist', orderListRouter);
 app.use('/order_static', statictRouter);
+app.use('/product_delete', deleteRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
