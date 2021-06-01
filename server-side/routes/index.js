@@ -28,7 +28,12 @@ router.get('/', function (req, res, next) {
   }
   // 판매자는 판매자 페이지로 이동시킴
   if (req.cookies.login['usercode'] === "company") {
-    res.render('company_main', {title: "RECIPES"});
+    let sql = "SELECT * FROM tbl_product WHERE company_id=?"
+    const id = req.cookies.login.id;
+    let data = [id];
+    connection.query(sql, data, (err, product) => {
+      res.render('company_main', { title: "RECIPES", product: product })
+    });
   }
   // 관리자는 관리자 페이지로 이동시킴
   if (req.cookies.login['usercode'] === "admin") {
