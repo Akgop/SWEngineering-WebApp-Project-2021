@@ -27,8 +27,8 @@ router.post('/', function (req, res, next) {
   var product_avg_score = req.query.product_avg_score;
   var product_item_name = req.query.product_item_name;
   var category_name = req.query.category_name;
-  var sql_data = [product_id,company_id,product_image,product_price,product_flag,product_avg_score,product_avg_score,product_item_name]
-  var sql1s = mysql.format(sql_1, category_name); 
+  var sql_data = [product_id,company_id,product_image,product_price,product_flag,product_avg_score,product_item_name,category_name]
+  var sql1s = mysql.format(sql_1, sql_data); 
   connection.query(sql1s, function (err, product) {
     res.render('product', {title: "RECIPES", product: product})
   });

@@ -18,6 +18,7 @@ var managementRouter = require('./routes/management');
 var orderRouter = require('./routes/order');
 var proregisterRouter = require('./routes/product_regiseter');
 var orderListRouter = require('./routes/customer_orderlist');
+var statictRouter = require('./routes/order_static');
 var app = express();
 
 // view engine setup
@@ -44,7 +45,7 @@ app.use('/management', managementRouter);
 app.use('/order', orderRouter);
 app.use('/product_regiseter', proregisterRouter);
 app.use('/customer_orderlist', orderListRouter);
-
+app.use('/order_static', statictRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
