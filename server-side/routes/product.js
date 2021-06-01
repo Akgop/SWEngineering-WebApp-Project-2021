@@ -51,11 +51,38 @@ router.post('/', upload.single("image"), function (req, res, next) {
 
   const sql = "INSERT INTO tbl_product(company_id, product_image, product_price, product_flag, product_avg_score, product_item_name, category_name) VALUES (?,?,?,?,?,?,?)";
   const data = [company_id, product_image, product_price, 0, 5, product_item_name, category_name];
-  console.log(data);
   connection.query(sql, data, (err, product) => {
-    console.log(product);
     res.redirect("/");
   });
 });
+
+/* UPDATE product. */
+router.post('/update', (req, res, next) => {
+  const company_id = req.cookies.login.id;
+  const product_item_name = req.body.product_item_name;
+  const product_price = req.body.product_price;
+  const category_name = req.body.category_name;
+  const product_id = req.body.product_id;
+
+  const sql = "UPDATE tbl_product SET product_item_name=?, product_price=?, category_name=? WHERE company_id=? and product_id=?";
+  const data = [product_item_name, product_price, category_name, company_id, product_id];
+  connection.query(sql, data, (err, result) => {
+    console.log(err);
+    console.log(result);
+    res.redirect("/");
+  });
+})
+
+/* UPDATE product. */
+router.post('/delete', (req, res, next) => {
+  const company_id = req.cookies.login.id;
+  const product_id = req.body.product_id;
+
+  const sql = "DELETE FROM tbl_product WHERE company_id=? and product_id=?";
+  const data = [company_id, product_id];
+  connection.query(sql, data, (err, result) => {
+    res.redirect("/");
+  });
+})
 
 module.exports = router;

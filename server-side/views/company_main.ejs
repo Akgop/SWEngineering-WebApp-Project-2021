@@ -43,7 +43,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-2">
                     <ul class="custom-menu">
-                        <li><a href="#" onclick="addProduct()">판매 물품 등록</a></li>
+                        <li><a href="/product">판매 물품 등록</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
@@ -60,19 +60,37 @@
     <section class="section site-portfolio">
         <div class="container">
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-6">
-                    <h2>판매자 페이지</h2>
+                <div class="col-md-12">
+                    <h2>판매 물품 조회/수정</h2>
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <td>판매자 기능 목록</td>
+                                <td>상품번호</td>
+                                <td>상품명</td>
+                                <td>가격</td>
+                                <td>평점</td>
+                                <td>승인 여부</td>
+                                <td>카테고리명</td>
+                                <td>수정</td>
+                                <td>삭제</td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a href="/product">판매 물품 등록</a></td>
-                            </tr>
+                            <% for (let i=0; i<product.length; i++) { %>
+                                <form method="post">
+                                    <tr>
+                                        <input type="hidden" id="product_id" name="product_id" value="<%= product[i].product_id %>">
+                                        <td><%= product[i].product_id %></td>
+                                        <td><input type="text" id="product_item_name" name="product_item_name" value="<%= product[i].product_item_name %>"></td>
+                                        <td><input type="text" id="product_price" name="product_price" value="<%= product[i].product_price %>"></td>
+                                        <td><%= product[i].product_avg_score %></td>
+                                        <td><%= product[i].product_flag %></td>
+                                        <td><input type="text" id="category_name" name="category_name" value="<%= product[i].category_name %>"></td>
+                                        <td><button class="btn btn-primary" formaction="/product/update" type="submit">수정</button></td>
+                                        <td><button class="btn btn-primary" formaction="/product/delete" type="submit">삭제</button></td>
+                                    </tr>
+                                </form> 
+                            <% } %>
                         </tbody>
                     </table>
                 </div>
