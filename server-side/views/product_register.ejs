@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    
+    <link href="../assets/css/style.css" rel="stylesheet">
+
+    <title>
+        <%= title %>
+    </title>
+
+    <!-- ======= Navbar ======= -->
+    <nav class="navbar navbar-light custom-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/">RECIPES.</a>
+            <a href="#" class="burger" data-bs-toggle="collapse" data-bs-target="#main-navbar">
+                <span></span>
+            </a>
+        </div>
+    </nav>
+    <!-- ======= Collapse Nav ======= -->
+    <div class="collapse navbar-collapse custom-navmenu" id="main-navbar">
+        <div class="container py-2 py-md-5">
+            <div class="row align-items-start">
+                <div class="col-md-2"></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <ul class="custom-menu">
+                        <li><a href="#">Order History</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="custom-menu">
+                        <li><a href="#">Basket</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="custom-menu">
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</head>
+
+<body>
+    <section class="section site-portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>판매 물품 등록하기</h2>  
+                    <form action="/product" method="post" enctype="multipart/form-data">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>상품명</td>
+                                    <td><input type="text" name="product_item_name" id="product_item_name" required/></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>가격</td>
+                                    <td><input type="number" name="product_price" id="product_price" required/></td>
+                                </tr>
+                                <tr>
+                                    <td>수량</td>
+                                    <td><input type="number" name="quantity" id="quantity" required/></td>
+                                </tr>
+                                <tr>
+                                    <td>카테고리</td>
+                                    <td><input type="text" name="category" id="category" required/></td>
+                                </tr>
+                                <tr>
+                                    <td>이미지</td>
+                                    <td><input type="file" id="image" name="image" required/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button class="btn btn-primary" type="submit">등록</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vendor JS Files -->
+    <script src="../assets/vendor/aos/aos.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../assets/js/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="mb-1">&copy; Copyright MyPortfolio. All Rights Reserved</p>
+                    <div class="credits">
+                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

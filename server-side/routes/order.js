@@ -61,5 +61,15 @@ router.post('/', function(req, res, next) {
   return res.json();
 })
 
+/* GET order List. */
+router.get('/history', function (req, res, next) {
+  const sql_get_history = "SELECT * FROM tbl_order INNER JOIN tbl_product ON tbl_order.product_id=tbl_product.product_id and tbl_order.customer_id=?";
+  const customerId = req.cookies.login.id;
+  connection.query(sql_get_history, [customerId], (err, order_list) => {
+    console.log(order_list);
+    res.render('order_history', {title: "RECIPES", order_list: order_list})
+  });
+});
+
 
 module.exports = router;
