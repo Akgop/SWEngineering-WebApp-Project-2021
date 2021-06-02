@@ -85,4 +85,21 @@ router.post('/delete', (req, res, next) => {
   });
 })
 
+
+router.get('/statistic', (req, res, next) => {
+  const usercode = req.cookies.login.usercode;
+  if (usercode !== "company") {
+    res.redirect("/");
+  }
+  const sql = "SELECT o.order_price, p.product_item_name, p.company_id, c.company_income, c.company_name \
+          FROM tbl_order AS o INNER JOIN tbl_product AS p ON o.product_id=p.product_id \
+          INNER JOIN tbl_company AS c ON p.company_id=c.company_id and c.company_id=?";
+  const company_id = req.cookies.login.id;
+
+  connection.query(sql, [company_id], (err, statistic) => {
+    console.log(statistic);
+    res.render('order_statistic', {title: "RECIPES", statistic: statistic})
+  });
+})
+
 module.exports = router;
