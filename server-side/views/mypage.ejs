@@ -38,97 +38,175 @@
     <div class="collapse navbar-collapse custom-navmenu" id="main-navbar">
         <div class="container py-2 py-md-5">
             <div class="row align-items-start">
-                <div class="col-md-2"></div>
-                <div class="col-md-2"></div>
-                <div class="col-md-2"></div>
-                <div class="col-md-2">
-                    <ul class="custom-menu">
-                        <li><a href="/order/history">Order History</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2">
-                    <ul class="custom-menu">
-                        <li><a href="/basket">Basket</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2">
-                    <ul class="custom-menu">
-                        <li><a href="/logout">Logout</a></li>
-                    </ul>
-                </div>
+                <% if (usercode === "customer") { %>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                        <ul class="custom-menu">
+                            <li><a href="/order/history">Order History</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
+                        <ul class="custom-menu">
+                            <li><a href="/basket">Basket</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
+                        <ul class="custom-menu">
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                <% } else if (usercode === "company") { %>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                        <ul class="custom-menu">
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                <% } else { %>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                        <ul class="custom-menu">
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                <% } %>
             </div>
         </div>
     </div>
 </head>
 
 <body>
-    <div class="container">
-        <br><br><br>
-        <div class="row">
-            <!-- <div class="col-md-3"></div> -->
-            <div class="col-md-6">
-                <h2>개인정보 조회</h2>
-                <form action="/mypage" method="post">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>이름</td>
-                                <td>
-                                    <%= mypage[0].customer_name %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>이메일</td>
-                                <td>
-                                    <%= mypage[0].customer_email %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>휴대전화</td>
-                                <td>
-                                    <input type="text" id="new_phone" name="new_phone" placeholder="010-xxxx-xxxx"
-                                        pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" value="<%= mypage[0].customer_phone %>" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>주소(배송지)</td>
-                                <td>
-                                    <input type="text" id="new_address" name="new_address"
-                                        value="<%= mypage[0].customer_destination %>" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>잔여 포인트</td>
-                                <td>
-                                    <p id="current"><%= mypage[0].customer_point %></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <button class="btn btn-primary" type="submit" formmethod="POST"">개인정보 수정</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
-            </div>
-            <div class=" col-md-2">
-            </div>
-            <div class="col-md-3">
-                <h2>포인트 충전</h2>
-                <input type="number" id="point" name="point" />
-                <button class="btn btn-primary" type="submit" onclick="addPoint()">포인트 추가</button>
+    <section class="section site-portfolio">
+        <div class="container">
+            <div class="row">
+                <% if (usercode === "customer") { %>
+                    <div class="col-md-6">
+                        <h2>개인정보 조회</h2>
+                        <form action="/mypage" method="post">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>이름</td>
+                                        <td><%= mypage[0].customer_name %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>이메일</td>
+                                        <td><%= mypage[0].customer_email %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>휴대전화</td>
+                                        <td><input type="text" id="new_phone" name="new_phone" placeholder="010-xxxx-xxxx"
+                                                pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" value="<%= mypage[0].customer_phone %>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>주소(배송지)</td>
+                                        <td><input type="text" id="new_address" name="new_address"
+                                                value="<%= mypage[0].customer_destination %>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>잔여 포인트</td>
+                                        <td><p id="current"><%= mypage[0].customer_point %></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><button class="btn btn-primary" type="submit" formmethod="POST"">개인정보 수정</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                    <div class=" col-md-2">
+                    </div>
+                    <div class="col-md-3">
+                        <h2>포인트 충전</h2>
+                        <input type="number" id="point" name="point" />
+                        <button class="btn btn-primary" type="submit" onclick="addPoint()">포인트 추가</button>
+                    </div>
+                <% } else if (usercode === "company") { %>
+                    <div class="col-md-6">
+                        <h2>판매자 정보 조회</h2>
+                        <form action="/mypage" method="post">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>회사 이름</td>
+                                        <td><%= mypage[0].company_name %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>이메일</td>
+                                        <td><%= mypage[0].company_email %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>휴대전화</td>
+                                        <td><input type="text" id="new_tel" name="new_tel" placeholder="010-xxxx-xxxx"
+                                                pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" value="<%= mypage[0].company_tel %>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>판매액</td>
+                                        <td><p id="income"><%= mypage[0].company_income %></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><button class="btn btn-primary" type="submit" formmethod="POST"">정보 수정</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                <% } else { %>
+                    <div class="col-md-6">
+                        <h2>판매자 정보 조회</h2>
+                        <form action="/mypage" method="post">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>관리자 이름</td>
+                                        <td><%= mypage[0].admin_name %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>이메일</td>
+                                        <td><%= mypage[0].admin_email %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                <% } %>
             </div>
         </div>
-        <br><br><br>
-    </div>
+    </section>
 
     <script>
         function addPoint() {
