@@ -85,6 +85,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <input type="hidden" id="company_id" name="company_id" value="<%= product_detail[0].company_id %>">
                         <input type="hidden" id="id" name="id" value="<%= product_detail[0].product_id %>">
                         <tr>
                             <td>품목</td>
@@ -108,7 +109,7 @@
                         </tr>
                         <tr>
                             <td><button class="btn btn-primary" onclick="basketButton()">장바구니 담기</button></td>
-                            <td><button class="btn btn-primary" onclick="order()">즉시 구매</button></td>
+                            <td><button class="btn btn-primary" onclick="orderDirectButton()">즉시 구매</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -135,6 +136,28 @@
                     .catch(error => console.error(error));
             }
             addToBasket();
+        }
+        function orderDirectButton() {
+            const quantity = document.getElementById("quantity").value;
+            const product_id = document.getElementById("id").value;
+            const price = document.getElementById("price").innerHTML;
+            const company_id = document.getElementById("company_id").value;
+            let order_price = parseInt(quantity) * parseInt(price);
+            let data = [{
+                    product_id: product_id,
+                    order_quantity: quantity,
+                    order_price: order_price,
+                    company_id: company_id
+                }];
+            let orderDirect = () => {
+                axios.post("http://localhost:3030/order", data)
+                    .then(response => {
+                        alert("주문이 완료되었습니다.");
+                        window.location = "/"
+                    })
+                    .catch(error => console.error(error));
+            }
+            orderDirect();
         }
     </script>
 
