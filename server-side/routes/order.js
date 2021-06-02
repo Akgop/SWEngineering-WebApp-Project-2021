@@ -71,13 +71,22 @@ router.get('/history', function (req, res, next) {
   });
 });
 
-router.get('/statistic', (req, res, next) => {
-  const sql_1 = "SELECT company_income tbl_company WHERE company_id = ?";
+router.get('/salehistory', (req, res, next) => {
+  const usercode = req.cookies.login.usercode;
+  if (usercode !== "company") {
+    res.redirect("/");
+  }
   const company_id = req.cookies.login.id;
-  const sql1s = mysql.format(sql_1, company_id); 
-  connection.query(sql1s, function (err, income) {
-    console.log(income);
-    res.render('order_statistic', {title: "RECIPES", income: income})
+  const sql = "SELECT o.order_id, u.customer_name, p.product_id, p.product_item_name, o.order_quantity, o.order_price, o.order_time \
+      FROM tbl_order AS o \
+      INNER JOIN tbl_customer AS u ON u.customer_id=o.customer_id \
+      INNER JOIN tbl_product AS p ON p.product_id=o.product_id \
+      INNER JOIN tbl_company AS c ON p.company_id=c.company_id WHERE c.company_id=?";
+  var product_id = req.query.product_id;
+  connection.query(sql, [company_id], function (err, list) {
+    console.log(err)
+    console.log(list);
+    res.render('salehistory', {title: "Sale list", list: list})
   });
 })
 
