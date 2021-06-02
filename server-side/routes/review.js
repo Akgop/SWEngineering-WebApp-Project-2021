@@ -37,14 +37,29 @@ router.get("/", (req, res, next) => {
   });
 });
 
+/* 새로운 포스트 작성 */
 router.get("/newpost", (req, res, next) => {
-  res.render("newpost", {title: "RECIPES"});
+  const sql = "SELECT product_id, product_item_name FROM tbl_product";
+  connection.query(sql, (err, product) => {
+    res.render("newpost", {title: "RECIPES", product: product});
+  })
+})
+
+/* 각 포스트 읽기 */
+router.get("/post", (req, res, next) => {
+  const sql = "SELECT * FROM tbl_review AS r INNER JOIN tbl_product AS p ON r.product_id=p.product_id AND review_id=?";
+  const review_id = req.query.review_id;
+  connection.query(sql, [review_id], (err, post) => {
+    console.log(post);
+    res.render("readreview", {title: "RECIPES", post: post});
+  })
 })
 
 
 /* post review. */
 router.post('/', upload.single("review_image"), (req, res, next) => {
-  const sql_post = "INSERT INTO tbl_review(customer_id, review_image, review_content, product_id, product_score, review_time) VALUES (?, ?, ?, ?, ?, NOW())";
+  const sql_post = "INSERT INTO tbl_review(customer_id, review_image, review_content, product_id, product_score, review_time) \
+      VALUES (?, ?, ?, ?, ?, NOW())";
 
   const customerId = req.cookies.login.id;
   const review_image = req.file.originalname;

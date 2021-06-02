@@ -76,7 +76,13 @@
                             <thead>
                                 <tr>
                                     <td>상품번호</td>
-                                    <td><input type="number" id="product_id" name="product_id" required/></td>
+                                    <td>
+                                        <select name="product_id" class="form-control">
+                                            <% for (let i=0; i<product.length; i++) { %>
+                                                <option value="<%= product[i].product_id %>"><%= product[i].product_item_name %></option>
+                                            <% } %>
+                                        </select>
+                                    </td>
                                 </tr>
                             </thead>
                             <tbody>
