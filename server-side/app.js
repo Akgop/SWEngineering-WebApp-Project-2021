@@ -15,7 +15,6 @@ var productdetailRouter = require('./routes/product_detail');
 var mypageRouter = require('./routes/mypage');
 var managementRouter = require('./routes/management');
 var orderRouter = require('./routes/order');
-var statictRouter = require('./routes/order_static');
 var reviewRouter = require('./routes/review');
 
 var app = express();
@@ -41,7 +40,6 @@ app.use('/productDetail', productdetailRouter);
 app.use('/mypage', mypageRouter);
 app.use('/management', managementRouter);
 app.use('/order', orderRouter);
-app.use('/order_static', statictRouter);
 app.use('/review', reviewRouter);
 
 

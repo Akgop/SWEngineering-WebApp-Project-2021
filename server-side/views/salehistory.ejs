@@ -5,8 +5,8 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -14,12 +14,12 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 
     <title>
         <%= title %>
@@ -40,7 +40,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-2">
                     <ul class="custom-menu">
-                        <li><a href="/order/salehistory">판매 내역</a></li>
+                        <li><a href="/product/statistic">매출 통계</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
@@ -73,35 +73,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>판매 물품 조회/수정/삭제</h2>
+                    <h2>상품 주문현황/판매내역</h2>
                     <table class="table table-hover">
                         <thead>
                             <tr>
+                                <td>주문번호</td>
+                                <td>주문자</td>
                                 <td>상품번호</td>
                                 <td>상품명</td>
-                                <td>가격</td>
-                                <td>평점</td>
-                                <td>승인 여부</td>
-                                <td>카테고리명</td>
-                                <td>수정</td>
-                                <td>삭제</td>
+                                <td>수량</td>
+                                <td>매출액</td>
+                                <td>주문시간</td>
                             </tr>
                         </thead>
                         <tbody>
-                            <% for (let i=0; i<product.length; i++) { %>
-                                <form method="post">
-                                    <tr>
-                                        <input type="hidden" id="product_id" name="product_id" value="<%= product[i].product_id %>">
-                                        <td><%= product[i].product_id %></td>
-                                        <td><input type="text" id="product_item_name" name="product_item_name" value="<%= product[i].product_item_name %>"></td>
-                                        <td><input type="text" id="product_price" name="product_price" value="<%= product[i].product_price %>"></td>
-                                        <td><%= product[i].product_avg_score %></td>
-                                        <td><%= product[i].product_flag %></td>
-                                        <td><input type="text" id="category_name" name="category_name" value="<%= product[i].category_name %>"></td>
-                                        <td><button class="btn btn-primary" formaction="/product/update" type="submit">수정</button></td>
-                                        <td><button class="btn btn-primary" formaction="/product/delete" type="submit">삭제</button></td>
-                                    </tr>
-                                </form> 
+                            <% for (let i=0; i<list.length; i++) { %>
+                                <tr>
+                                    <td><%= list[i].order_id %></td>
+                                    <td><%= list[i].customer_name %></td>
+                                    <td><%= list[i].product_id %></td>
+                                    <td><%= list[i].product_item_name %></td>
+                                    <td><%= list[i].order_quantity %></td>
+                                    <td><%= list[i].order_price %></td>
+                                    <td><%= list[i].order_time %></td>
+                                </tr>
                             <% } %>
                         </tbody>
                     </table>
@@ -111,14 +106,14 @@
     </section>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets/vendor/aos/aos.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Footer -->
