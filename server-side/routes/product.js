@@ -26,12 +26,15 @@ var upload = multer({ storage: storage })
 /* GET menu_id. */
 router.get('/', function (req, res, next) {
   const usercode = req.cookies.login.usercode;
-
+  
   if (usercode === "customer") {
-    let sql = "SELECT * FROM tbl_product INNER JOIN tbl_category ON tbl_product.category_name = tbl_category.category_name and tbl_category.category_id = ?";
-    const category_name = req.query.ingredient;
-    const sql1s = mysql.format(sql_1, category_name);
-    connection.query(sql1s, function (err, product) {
+    let sql = "SELECT DISTINCT p.product_id, p.product_item_name, p.product_image \
+        FROM tbl_product AS p, tbl_category AS c, tbl_ingredient AS i \
+        WHERE p.category_name=c.category_name AND i.category_name=c.category_id AND c.category_id=?";
+    const category_id = req.query.ingredient;
+    connection.query(sql, [category_id], (err, product) => {
+      console.log(err);
+      console.log(product);
       res.render('product', { title: "RECIPES", product: product })
     });
   }
