@@ -5,8 +5,8 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -14,12 +14,12 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 
     <title>
         <%= title %>
@@ -70,31 +70,31 @@
     <section class="section site-portfolio">
         <div class="container">
             <div class="row">
-                <div><button class="btn btn-primary" onclick="location.href='/review/newpost'">새 리뷰 작성</button></div>
-            </div>
-            <br>
-            <div class="row">
                 <div class="col-md-12">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <td>글 번호</td>
-                                <td>작성자</td>
                                 <td>상품명</td>
-                                <td>평점</td>
-                                <td>작성 시간</td>
+                                <td><%= post[0].review_id %></td>
                             </tr>
                         </thead>
                         <tbody>
-                            <% for (let i=0; i<review.length; i++) { %>
-                                <tr onclick="location.href='/review/post?review_id=<%= review[i].review_id %>'" style="cursor: pointer;">
-                                    <td><%= review[i].review_id %></td>
-                                    <td><%= review[i].customer_name %></td>
-                                    <td><%= review[i].product_item_name %></td>
-                                    <td><%= review[i].product_score %></td>
-                                    <td><%= review[i].review_time %></td>
-                                </tr>
-                            <% } %>
+                            <tr>
+                                <td>작성자</td>
+                                <td><%= post[0].customer_id %></td>
+                            </tr>
+                            <tr>
+                                <td>사진</td>
+                                <td><img src="../assets/img/<%= post[0].review_image %>"/></td>
+                            </tr>
+                            <tr>
+                                <td>후기</td>
+                                <td><%= post[0].review_content %></td>
+                            </tr>
+                            <tr>
+                                <td>평점</td>
+                                <td><%= post[0].product_score %></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -104,14 +104,14 @@
 
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets/vendor/aos/aos.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Footer -->
