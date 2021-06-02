@@ -71,5 +71,14 @@ router.get('/history', function (req, res, next) {
   });
 });
 
+router.get('/statistic', (req, res, next) => {
+  const sql_1 = "SELECT company_income tbl_company WHERE company_id = ?";
+  const company_id = req.cookies.login.id;
+  const sql1s = mysql.format(sql_1, company_id); 
+  connection.query(sql1s, function (err, income) {
+    console.log(income);
+    res.render('order_statistic', {title: "RECIPES", income: income})
+  });
+})
 
 module.exports = router;

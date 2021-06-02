@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Chart Link -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <link href="../assets/css/style.css" rel="stylesheet">
+
+    <title>
+        <%= title %>
+    </title>
+
+    <!-- ======= Navbar ======= -->
+    <nav class="navbar navbar-light custom-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/">RECIPES.</a>
+            <a href="#" class="burger" data-bs-toggle="collapse" data-bs-target="#main-navbar">
+                <span></span>
+            </a>
+        </div>
+    </nav>
+    <div class="collapse navbar-collapse custom-navmenu" id="main-navbar">
+        <div class="container py-2 py-md-5">
+            <div class="row align-items-start">
+                <div class="col-md-2"></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <ul class="custom-menu">
+                        <li><a href="/product/statistic">매출 통계</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="custom-menu">
+                        <li><a href="/product">판매 물품 등록</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="custom-menu">
+                        <li><a href="/mypage">My Page</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="custom-menu">
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</head>
+
+<body>
+    <section class="section site-portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+
+                    <h2><%= statistic[0].company_name %>의 매출 통계</h2>
+                    <input type="hidden" id="length" name="length" value="<%= statistic.length %>">
+                    <% for (let i=0; i<statistic.length; i++) { %>
+                        <input type="hidden" id="price" name="price" value="<%= statistic[i].order_price %>">
+                        <input type="hidden" id="item" name="item" value="<%= statistic[i].product_item_name %>">
+                        <input type="hidden" id="company" name="company" value="<%= statistic[i].company_id %>">
+                        <input type="hidden" id="income" name="income" value="<%= statistic[i].company_income %>">
+                    <% } %>
+                    <canvas id="statistic"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const len = document.getElementById("length").value;
+        const price = document.querySelectorAll("#price");
+        const item = document.querySelectorAll("#item");
+        const company = document.querySelectorAll("#company");
+        const income = document.querySelectorAll("#income");
+
+        let items = [];
+        let each_income = [];
+        for (let i = 0; i < len; i++) {
+            items.push(item[i].value);
+            each_income.push(price[i].value);
+        }
+        items.push("총액");
+        each_income.push(income[0].value);
+        let back_colors = ['rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'];
+        let border_colors = [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)' ];
+
+        let ctx = document.getElementById('statistic');
+        let myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: items,
+                datasets: [{
+                    label: '# of Votes',
+                    data: each_income,
+                    backgroundColor: back_colors, 
+                    borderColor: border_colors, 
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+
+    <!-- Vendor JS Files -->
+    <script src="../assets/vendor/aos/aos.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../assets/js/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="mb-1">&copy; Copyright MyPortfolio. All Rights Reserved</p>
+                    <div class="credits">
+                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
