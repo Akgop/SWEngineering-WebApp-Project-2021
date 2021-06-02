@@ -30,9 +30,10 @@ router.post('/', function (req, res, next) {
         let user_data = [email, password, name, phone, address];
         connection.query(user_sql, user_data, (err, results) => {
             if (err) console.log(err);
+            console.log(results);
             res.cookie("login", {
                 authorized: true,
-                id: results[0].company_id,
+                id: results.insertId,
                 usercode: usercode
             });
             res.redirect('/');
@@ -45,7 +46,7 @@ router.post('/', function (req, res, next) {
             if (err) console.log(err);
             res.cookie("login", {
                 authorized: true,
-                id: results[0].company_id,
+                id: results.insertId,
                 usercode: usercode
             });
             res.redirect('/');
@@ -58,7 +59,7 @@ router.post('/', function (req, res, next) {
             if (err) console.log(err);
             res.cookie("login", {
                 authorized: true,
-                id: results[0].company_id,
+                id: results.insertId,
                 usercode: usercode
             });
             res.redirect('/');
